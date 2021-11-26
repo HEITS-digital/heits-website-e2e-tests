@@ -7,7 +7,7 @@ __ACCEPTED_COOKIE_LS = 'window.localStorage.setItem("accepted-cookie", "true")'
 
 @pytest.fixture
 def set_up(page):
-    page.goto(Urls.ENGINEERING_URL.value)
+    page.goto(Urls.BASE_URL.value)
     # inject local storage k/v to set accept cookies on true
     page.evaluate(__ACCEPTED_COOKIE_LS)
     # reload for the injecting of local storage to take effect
