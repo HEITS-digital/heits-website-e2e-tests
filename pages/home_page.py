@@ -1,5 +1,5 @@
-from playwright._impl._locator import Locator
-from playwright.sync_api import Page
+
+from playwright.sync_api import Page, Locator
 
 from utils.data import MenuCloseHeader, MenuItems
 from utils.playwright_utils import PlaywrightUtils
@@ -13,9 +13,10 @@ class HomePage:
     # private
     __I_ACCEPT_COOKIE_BUTTON_XPATH = "//span[contains(text(),'I accept')]"
     __HEADER_HEITS_XPATH = "//h1[text()='HEITS']"
-    __HEADER_MENU_BUTTON_XPATH = "//a/span[contains(text(), '{}')]"
+    __HEADER_MENU_BUTTON_XPATH = "//button/span[contains(text(), '{}')]"
     __MENU_ITEM = "//span[contains(text(),'{}')]"
 
+    # getters
     def get_header(self) -> Locator:
         return self.page.locator(self.__HEADER_HEITS_XPATH)
 
@@ -23,7 +24,7 @@ class HomePage:
         return self.page.locator(self.__HEADER_MENU_BUTTON_XPATH.format(menu_or_close))
 
     def get_menu_or_close_header_inner_text(self, menu_or_close: MenuCloseHeader) -> str:
-        return self.page.locator(self.__HEADER_MENU_BUTTON_XPATH.format(menu_or_close)).inner_text()
+        return self.playwright_utils.wait_and_get_locator(self.__HEADER_MENU_BUTTON_XPATH.format(menu_or_close)).inner_text()
 
     # clicks
     def accept_cookie(self):

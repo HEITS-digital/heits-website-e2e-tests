@@ -6,15 +6,15 @@ from pages.home_page import HomePage
 from utils.data import MenuCloseHeader, MenuItems
 
 
-@pytest.mark.usefixtures("set_up")
+@pytest.mark.usefixtures("setup")
 class HomeTest(unittest.TestCase):
     __HEITS = 'HEITS'
     __MENU = 'Menu'
     __CLOSE = 'Close'
 
     @pytest.fixture(autouse=True)
-    def before_test(self, set_up):
-        self.home_page = HomePage(set_up)
+    def before_test(self, setup):
+        self.home_page = HomePage(setup)
 
     def test_home_page_header(self):
         assert self.home_page.get_header().inner_text() == self.__HEITS, \
@@ -80,14 +80,6 @@ class HomeTest(unittest.TestCase):
         assert self.home_page.page.url == MenuItems.OUR_WORK.values[1], \
             f'actual : {self.home_page.page.url} \n' \
             f'expected : {MenuItems.OUR_WORK.values[1]}'
-
-    def test_articles_page(self):
-        self.home_page.click_menu_header_button(MenuCloseHeader.MENU.value)
-        self.home_page.click_menu_item(MenuItems.ARTICLES.values[0])
-        self.home_page.page.wait_for_url(MenuItems.ARTICLES.values[1])
-        assert self.home_page.page.url == MenuItems.ARTICLES.values[1], \
-            f'actual : {self.home_page.page.url} \n' \
-            f'expected : {MenuItems.ARTICLES.values[1]}'
 
     def test_engagement_models_page(self):
         self.home_page.click_menu_header_button(MenuCloseHeader.MENU.value)
