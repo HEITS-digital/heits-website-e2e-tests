@@ -23,6 +23,5 @@ class MenuItems(MultiValueEnum):
     USER_EXPERIENCE = 'User experience', 'https://apex.heits.digital/user-experience'
     CULTURE = 'Culture', 'https://apex.heits.digital/culture'
     OUR_WORK = 'Our work', 'https://apex.heits.digital/work'
-    ARTICLES = 'Articles', 'https://apex.heits.digital/articles'
     ENGAGEMENT_MODELS = 'Engagement models', 'https://apex.heits.digital/engagement'
     LETS_CHAT = 'Let’s chat'

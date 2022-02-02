@@ -3,3 +3,4 @@ pytest-playwright
 pytest
 delayed-assert
 aenum
+pytest-html
