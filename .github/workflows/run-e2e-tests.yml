@@ -1,0 +1,22 @@
+name : Run playwright e2e tests for apex heits digital
+
+on :
+  workflow_dispatch:
+  schedule:
+    - cron: 0 * * * *
+
+jobs:
+  run-playwright-tests:
+    runs-on : ubuntu-latest
+    container : mcr.microsoft.com/playwright:focal
+    steps:
+      - name: Checkout
+        uses : actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest --browser chromium
