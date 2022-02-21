@@ -7,11 +7,6 @@ class Urls(Enum):
     ENGINEERING_URL = 'https://apex.heits.digital/engineering'
 
 
-class MenuCloseHeader(Enum):
-    MENU = 'Menu'
-    CLOSE = 'Close'
-
-
 class MenuItems(MultiValueEnum):
     """
     MultiValueEnum enables tuple values in enum configuration

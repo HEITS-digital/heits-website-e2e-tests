@@ -1,7 +1,6 @@
+from playwright.sync_api import Page
 
-from playwright.sync_api import Page, Locator
-
-from utils.data import MenuCloseHeader, MenuItems
+from utils.data import MenuItems
 from utils.playwright_utils import PlaywrightUtils
 
 
@@ -13,25 +12,26 @@ class HomePage:
     # private
     __I_ACCEPT_COOKIE_BUTTON_XPATH = "//span[contains(text(),'I accept')]"
     __HEADER_HEITS_XPATH = "//h1[text()='HEITS']"
-    __HEADER_MENU_BUTTON_XPATH = "//button/span[contains(text(), '{}')]"
+    __HEADER_MENU_BUTTON_XPATH = "//button/span[contains(text(), 'Menu')]"
+    __HEADER_CLOSE_BUTTON_XPATH = "//button/span[contains(text(), 'Close')]"
     __MENU_ITEM = "//span[contains(text(),'{}')]"
 
     # getters
-    def get_header(self) -> Locator:
-        return self.page.locator(self.__HEADER_HEITS_XPATH)
+    def get_header_inner_text(self) -> str:
+        return self.page.locator(self.__HEADER_HEITS_XPATH).inner_text()
 
-    def get_menu_or_close_header(self, menu_or_close: MenuCloseHeader) -> Locator:
-        return self.page.locator(self.__HEADER_MENU_BUTTON_XPATH.format(menu_or_close))
+    def get_menu_header_inner_text(self) -> str:
+        return self.page.locator(self.__HEADER_MENU_BUTTON_XPATH).inner_text()
 
-    def get_menu_or_close_header_inner_text(self, menu_or_close: MenuCloseHeader) -> str:
-        return self.playwright_utils.wait_and_get_locator(self.__HEADER_MENU_BUTTON_XPATH.format(menu_or_close)).inner_text()
+    def get_close_header_inner_text(self) -> str:
+        return self.page.locator(self.__HEADER_CLOSE_BUTTON_XPATH).inner_text()
 
     # clicks
-    def accept_cookie(self):
-        self.page.wait_for_selector(self.__I_ACCEPT_COOKIE_BUTTON_XPATH).click()
+    def click_menu_header_button(self):
+        self.page.wait_for_selector(self.__HEADER_MENU_BUTTON_XPATH).click()
 
-    def click_menu_header_button(self, menu_or_close: MenuCloseHeader):
-        self.get_menu_or_close_header(menu_or_close).click()
+    def click_close_header_button(self):
+        self.page.wait_for_selector(self.__HEADER_CLOSE_BUTTON_XPATH).click()
 
     def click_menu_item(self, item: MenuItems):
         """
